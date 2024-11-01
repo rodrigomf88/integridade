@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+  <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+    <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+    <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+  </edmx:Reference>
+  <edmx:DataServices>
+    <Schema Namespace="MyService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+      <EntityContainer Name="EntityContainer">
+        <EntitySet Name="JobApplication" EntityType="MyService.JobApplication">
+          <NavigationPropertyBinding Path="customIntegridade" Target="PicklistOption"/>
+          <NavigationPropertyBinding Path="custom_exGoverno" Target="PicklistOption"/>
+          <NavigationPropertyBinding Path="custom_grauPublico1" Target="PicklistOption"/>
+          <NavigationPropertyBinding Path="custom_grauPublico2" Target="PicklistOption"/>
+          <NavigationPropertyBinding Path="custom_grauPublico3" Target="PicklistOption"/>
+          <NavigationPropertyBinding Path="jobAppStatus" Target="JobApplicationStatus"/>
+          <NavigationPropertyBinding Path="jobRequisition" Target="JobRequisition"/>
+          <NavigationPropertyBinding Path="statusId" Target="PicklistOption"/>
+        </EntitySet>
+        <EntitySet Name="JobApplicationStatus" EntityType="MyService.JobApplicationStatus">
+          <NavigationPropertyBinding Path="jobApplications" Target="JobApplication"/>
+        </EntitySet>
+        <EntitySet Name="JobRequisition" EntityType="MyService.JobRequisition">
+          <NavigationPropertyBinding Path="recruiter" Target="JobRequisitionOperator"/>
+        </EntitySet>
+        <EntitySet Name="PicklistOption" EntityType="MyService.PicklistOption">
+          <NavigationPropertyBinding Path="childPicklistOptions" Target="PicklistOption"/>
+          <NavigationPropertyBinding Path="parentPicklistOption" Target="PicklistOption"/>
+        </EntitySet>
+        <EntitySet Name="JobRequisitionOperator" EntityType="MyService.JobRequisitionOperator"/>
+        <EntitySet Name="Drafts" EntityType="MyService.Drafts"/>
+        <EntitySet Name="IntegrityOptions" EntityType="MyService.IntegrityOptions">
+          <NavigationPropertyBinding Path="parentPickListValueNav" Target="IntegrityOptions"/>
+        </EntitySet>
+        <ActionImport Name="UpdateJobApplication" Action="MyService.UpdateJobApplication"/>
+      </EntityContainer>
+      <EntityType Name="JobApplication">
+        <Key>
+          <PropertyRef Name="applicationId"/>
+        </Key>
+        <Property Name="applicationId" Type="Edm.Int64" Nullable="false"/>
+        <Property Name="candidateId" Type="Edm.Int64" Nullable="false"/>
+        <Property Name="jobReqId" Type="Edm.Int64" Nullable="false"/>
+        <Property Name="firstName" Type="Edm.String"/>
+        <Property Name="lastName" Type="Edm.String"/>
+        <Property Name="jobTitle" Type="Edm.String"/>
+        <NavigationProperty Name="customIntegridade" Type="Collection(MyService.PicklistOption)"/>
+        <Property Name="customIntegridadeComments" Type="Edm.String"/>
+        <Property Name="customIntegridadeData" Type="Edm.DateTimeOffset"/>
+        <Property Name="customIntegridadeAvaliador" Type="Edm.String"/>
+        <Property Name="custom_envioIntegridade" Type="Edm.DateTimeOffset"/>
+        <Property Name="custom_tituloExGoverno" Type="Edm.String"/>
+        <Property Name="custom_empresaExGoverno" Type="Edm.String"/>
+        <Property Name="custom_localExGoverno" Type="Edm.String"/>
+        <NavigationProperty Name="custom_exGoverno" Type="Collection(MyService.PicklistOption)"/>
+        <Property Name="custom_parentePublico1" Type="Edm.String"/>
+        <Property Name="custom_parentePublico2" Type="Edm.String"/>
+        <Property Name="custom_parentePublico3" Type="Edm.String"/>
+        <Property Name="custom_tituloPublico1" Type="Edm.String"/>
+        <Property Name="custom_tituloPublico2" Type="Edm.String"/>
+        <Property Name="custom_tituloPublico3" Type="Edm.String"/>
+        <Property Name="custom_empresaPublico1" Type="Edm.String"/>
+        <Property Name="custom_empresaPublico2" Type="Edm.String"/>
+        <Property Name="custom_empresaPublico3" Type="Edm.String"/>
+        <Property Name="custom_localPublico1" Type="Edm.String"/>
+        <Property Name="custom_localPublico2" Type="Edm.String"/>
+        <Property Name="custom_localPublico3" Type="Edm.String"/>
+        <NavigationProperty Name="custom_grauPublico1" Type="Collection(MyService.PicklistOption)"/>
+        <NavigationProperty Name="custom_grauPublico2" Type="Collection(MyService.PicklistOption)"/>
+        <NavigationProperty Name="custom_grauPublico3" Type="Collection(MyService.PicklistOption)"/>
+        <NavigationProperty Name="jobAppStatus" Type="MyService.JobApplicationStatus"/>
+        <NavigationProperty Name="jobRequisition" Type="MyService.JobRequisition"/>
+        <NavigationProperty Name="statusId" Type="Collection(MyService.PicklistOption)"/>
+      </EntityType>
+      <EntityType Name="JobApplicationStatus">
+        <Key>
+          <PropertyRef Name="appStatusSetId"/>
+        </Key>
+        <Property Name="appStatusSetId" Type="Edm.Int64" Nullable="false"/>
+        <Property Name="appStatusId" Type="Edm.Int64"/>
+        <Property Name="appStatusName" Type="Edm.String" Nullable="false"/>
+        <NavigationProperty Name="jobApplications" Type="Collection(MyService.JobApplication)"/>
+      </EntityType>
+      <EntityType Name="JobRequisition">
+        <Property Name="position_job_title" Type="Edm.String"/>
+        <NavigationProperty Name="recruiter" Type="Collection(MyService.JobRequisitionOperator)"/>
+      </EntityType>
+      <EntityType Name="PicklistOption">
+        <Key>
+          <PropertyRef Name="id"/>
+        </Key>
+        <Property Name="id" Type="Edm.Int64" Nullable="false"/>
+        <Property Name="externalCode" Type="Edm.String" MaxLength="256"/>
+        <Property Name="localeLabel" Type="Edm.String"/>
+        <Property Name="maxValue" Type="Edm.Double"/>
+        <Property Name="mdfExternalCode" Type="Edm.String" MaxLength="256"/>
+        <Property Name="minValue" Type="Edm.Double"/>
+        <Property Name="optionValue" Type="Edm.Double"/>
+        <Property Name="sortOrder" Type="Edm.Int32"/>
+        <Property Name="status" Type="Edm.String" MaxLength="9"/>
+        <NavigationProperty Name="childPicklistOptions" Type="Collection(MyService.PicklistOption)"/>
+        <NavigationProperty Name="parentPicklistOption" Type="MyService.PicklistOption"/>
+      </EntityType>
+      <EntityType Name="JobRequisitionOperator">
+        <Property Name="firstName" Type="Edm.String"/>
+        <Property Name="lastName" Type="Edm.String"/>
+      </EntityType>
+      <EntityType Name="Drafts">
+        <Key>
+          <PropertyRef Name="ID"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="jobApplicationId" Type="Edm.Int64" Nullable="false"/>
+        <Property Name="optionId" Type="Edm.Int64" Nullable="false"/>
+        <Property Name="customIntegridadeComments" Type="Edm.String" Nullable="false"/>
+      </EntityType>
+      <EntityType Name="IntegrityOptions">
+        <Key>
+          <PropertyRef Name="PickListV2_effectiveStartDate"/>
+          <PropertyRef Name="PickListV2_id"/>
+          <PropertyRef Name="externalCode"/>
+        </Key>
+        <Property Name="PickListV2_effectiveStartDate" Type="Edm.Date" Nullable="false"/>
+        <Property Name="PickListV2_id" Type="Edm.String" MaxLength="128" Nullable="false"/>
+        <Property Name="externalCode" Type="Edm.String" MaxLength="128" Nullable="false"/>
+        <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+        <Property Name="createdDateTime" Type="Edm.DateTimeOffset"/>
+        <Property Name="externalStandardizedCode" Type="Edm.String" MaxLength="255"/>
+        <Property Name="lValue" Type="Edm.Int64"/>
+        <Property Name="label_ar_SA" Type="Edm.String" MaxLength="255"/>
+        <Property Name="label_bs_ID" Type="Edm.String" MaxLength="255"/>
+        <Property Name="label_defaultValue" Type="Edm.String" MaxLength="255"/>
+        <Property Name="label_en_DEBUG" Type="Edm.String" MaxLength="255"/>
+        <Property Name="label_en_US" Type="Edm.String" MaxLength="255"/>
+        <Property Name="label_es_ES" Type="Edm.String" MaxLength="255"/>
+        <Property Name="label_ja_JP" Type="Edm.String" MaxLength="255"/>
+        <Property Name="label_localized" Type="Edm.String" MaxLength="255"/>
+        <Property Name="label_pt_BR" Type="Edm.String" MaxLength="255"/>
+        <Property Name="lastModifiedBy" Type="Edm.String" MaxLength="255"/>
+        <Property Name="lastModifiedDateTime" Type="Edm.DateTimeOffset"/>
+        <Property Name="legacyStatus" Type="Edm.Int64"/>
+        <Property Name="maxVal" Type="Edm.Decimal" Scale="variable"/>
+        <Property Name="mdfSystemRecordStatus" Type="Edm.String" MaxLength="255"/>
+        <Property Name="minVal" Type="Edm.Decimal" Scale="variable"/>
+        <Property Name="nonUniqueExternalCode" Type="Edm.String" MaxLength="255"/>
+        <Property Name="optValue" Type="Edm.Decimal" Scale="variable"/>
+        <Property Name="optionId" Type="Edm.Int64"/>
+        <Property Name="parentPickListValue" Type="Edm.String" MaxLength="128"/>
+        <Property Name="rValue" Type="Edm.Int64"/>
+        <Property Name="status" Type="Edm.String" MaxLength="128"/>
+        <NavigationProperty Name="parentPickListValueNav" Type="Collection(MyService.IntegrityOptions)"/>
+      </EntityType>
+      <Action Name="UpdateJobApplication" IsBound="false">
+        <Parameter Name="applicationId" Type="Edm.String"/>
+        <Parameter Name="customIntegridadeComments" Type="Edm.String"/>
+        <Parameter Name="customIntegridadeData" Type="Edm.String"/>
+        <Parameter Name="customIntegridadeAvaliador" Type="Edm.String"/>
+        <Parameter Name="customIntegridade" Type="Edm.String"/>
+        <ReturnType Type="Edm.String"/>
+      </Action>
+      <Annotations Target="MyService.Drafts/ID">
+        <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+      </Annotations>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>

@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+  <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+  </edmx:Reference>
+  <edmx:DataServices m:DataServiceVersion="2.0">
+    <Schema Namespace="MyService" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+      <EntityContainer Name="EntityContainer" m:IsDefaultEntityContainer="true">
+        <EntitySet Name="JobApplication" EntityType="MyService.JobApplication" sap:label="JobApplication" sap:creatable="true" sap:updatable="true" sap:deletable="false"/>
+        <EntitySet Name="JobApplicationStatus" EntityType="MyService.JobApplicationStatus" sap:label="JobApplicationStatus" sap:creatable="false" sap:updatable="false" sap:deletable="false"/>
+        <EntitySet Name="JobRequisition" EntityType="MyService.JobRequisition" sap:label="JobRequisition" sap:creatable="true" sap:updatable="true" sap:deletable="true"/>
+        <EntitySet Name="PicklistOption" EntityType="MyService.PicklistOption" sap:label="PicklistOption" sap:creatable="true" sap:updatable="true" sap:deletable="false"/>
+        <EntitySet Name="JobRequisitionOperator" EntityType="MyService.JobRequisitionOperator" sap:label="JobRequisitionOperator" sap:creatable="false" sap:updatable="false" sap:deletable="false"/>
+        <EntitySet Name="Drafts" EntityType="MyService.Drafts"/>
+        <EntitySet Name="IntegrityOptions" EntityType="MyService.IntegrityOptions" sap:label="Picklist Value" sap:creatable="true" sap:updatable="true" sap:deletable="true"/>
+        <FunctionImport Name="UpdateJobApplication" ReturnType="Edm.String" m:HttpMethod="POST">
+          <Parameter Name="applicationId" Type="Edm.String" Mode="In" Nullable="true"/>
+          <Parameter Name="customIntegridadeComments" Type="Edm.String" Mode="In" Nullable="true"/>
+          <Parameter Name="customIntegridadeData" Type="Edm.String" Mode="In" Nullable="true"/>
+          <Parameter Name="customIntegridadeAvaliador" Type="Edm.String" Mode="In" Nullable="true"/>
+          <Parameter Name="customIntegridade" Type="Edm.String" Mode="In" Nullable="true"/>
+        </FunctionImport>
+        <AssociationSet Name="JobApplication_customIntegridade" Association="MyService.JobApplication_customIntegridade" sap:creatable="true" sap:updatable="true">
+          <End Role="JobApplication" EntitySet="JobApplication"/>
+          <End Role="PicklistOption" EntitySet="PicklistOption"/>
+        </AssociationSet>
+        <AssociationSet Name="JobApplication_custom_exGoverno" Association="MyService.JobApplication_custom_exGoverno" sap:creatable="true" sap:updatable="true">
+          <End Role="JobApplication" EntitySet="JobApplication"/>
+          <End Role="PicklistOption" EntitySet="PicklistOption"/>
+        </AssociationSet>
+        <AssociationSet Name="JobApplication_custom_grauPublico1" Association="MyService.JobApplication_custom_grauPublico1" sap:creatable="true" sap:updatable="true">
+          <End Role="JobApplication" EntitySet="JobApplication"/>
+          <End Role="PicklistOption" EntitySet="PicklistOption"/>
+        </AssociationSet>
+        <AssociationSet Name="JobApplication_custom_grauPublico2" Association="MyService.JobApplication_custom_grauPublico2" sap:creatable="true" sap:updatable="true">
+          <End Role="JobApplication" EntitySet="JobApplication"/>
+          <End Role="PicklistOption" EntitySet="PicklistOption"/>
+        </AssociationSet>
+        <AssociationSet Name="JobApplication_custom_grauPublico3" Association="MyService.JobApplication_custom_grauPublico3" sap:creatable="true" sap:updatable="true">
+          <End Role="JobApplication" EntitySet="JobApplication"/>
+          <End Role="PicklistOption" EntitySet="PicklistOption"/>
+        </AssociationSet>
+        <AssociationSet Name="JobApplication_jobAppStatus" Association="MyService.JobApplication_jobAppStatus" sap:creatable="true" sap:updatable="true">
+          <End Role="JobApplication" EntitySet="JobApplication"/>
+          <End Role="JobApplicationStatus" EntitySet="JobApplicationStatus"/>
+        </AssociationSet>
+        <AssociationSet Name="JobApplication_jobRequisition" Association="MyService.JobApplication_jobRequisition" sap:creatable="false" sap:updatable="false">
+          <End Role="JobApplication" EntitySet="JobApplication"/>
+          <End Role="JobRequisition" EntitySet="JobRequisition"/>
+        </AssociationSet>
+        <AssociationSet Name="JobApplication_statusId" Association="MyService.JobApplication_statusId" sap:creatable="true" sap:updatable="true">
+          <End Role="JobApplication" EntitySet="JobApplication"/>
+          <End Role="PicklistOption" EntitySet="PicklistOption"/>
+        </AssociationSet>
+        <AssociationSet Name="JobApplicationStatus_jobApplications" Association="MyService.JobApplicationStatus_jobApplications" sap:creatable="false" sap:updatable="false">
+          <End Role="JobApplicationStatus" EntitySet="JobApplicationStatus"/>
+          <End Role="JobApplication" EntitySet="JobApplication"/>
+        </AssociationSet>
+        <AssociationSet Name="JobRequisition_recruiter" Association="MyService.JobRequisition_recruiter" sap:creatable="true" sap:updatable="true">
+          <End Role="JobRequisition" EntitySet="JobRequisition"/>
+          <End Role="JobRequisitionOperator" EntitySet="JobRequisitionOperator"/>
+        </AssociationSet>
+        <AssociationSet Name="PicklistOption_childPicklistOptions" Association="MyService.PicklistOption_childPicklistOptions" sap:creatable="false" sap:updatable="false">
+          <End Role="PicklistOption" EntitySet="PicklistOption"/>
+          <End Role="PicklistOption1" EntitySet="PicklistOption"/>
+        </AssociationSet>
+        <AssociationSet Name="PicklistOption_parentPicklistOption" Association="MyService.PicklistOption_parentPicklistOption" sap:creatable="true" sap:updatable="true">
+          <End Role="PicklistOption" EntitySet="PicklistOption"/>
+          <End Role="PicklistOption1" EntitySet="PicklistOption"/>
+        </AssociationSet>
+        <AssociationSet Name="IntegrityOptions_parentPickListValueNav" Association="MyService.IntegrityOptions_parentPickListValueNav" sap:creatable="true" sap:updatable="true">
+          <End Role="IntegrityOptions" EntitySet="IntegrityOptions"/>
+          <End Role="IntegrityOptions1" EntitySet="IntegrityOptions"/>
+        </AssociationSet>
+      </EntityContainer>
+      <EntityType Name="JobApplication" sap:label="JobApplication" sap:upsertable="true">
+        <Key>
+          <PropertyRef Name="applicationId"/>
+        </Key>
+        <Property Name="applicationId" Type="Edm.Int64" Nullable="false" sap:required="false" sap:creatable="false" sap:updatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:label="Application Id"/>
+        <Property Name="candidateId" Type="Edm.Int64" Nullable="false" sap:required="false" sap:creatable="true" sap:updatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="false" sap:filterable="true" sap:label="Candidate Id"/>
+        <Property Name="jobReqId" Type="Edm.Int64" Nullable="false" sap:required="false" sap:creatable="true" sap:updatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="false" sap:filterable="true" sap:label="Job Requisition Id"/>
+        <Property Name="firstName" Type="Edm.String" sap:required="false" sap:creatable="true" sap:updatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:field-control="jobAppPermissionsNav/firstName" sap:label="First Name"/>
+        <Property Name="lastName" Type="Edm.String" sap:required="false" sap:creatable="true" sap:updatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:field-control="jobAppPermissionsNav/lastName" sap:label="Last Name"/>
+        <Property Name="jobTitle" Type="Edm.String" sap:required="false" sap:creatable="true" sap:updatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="false" sap:filterable="true" sap:field-control="jobAppPermissionsNav/jobTitle" sap:label="Current Title"/>
+        <NavigationProperty Name="customIntegridade" Relationship="MyService.JobApplication_customIntegridade" FromRole="JobApplication" ToRole="PicklistOption" sap:required="false" sap:creatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:picklist="integridade" sap:field-control="jobAppPermissionsNav/customIntegridade" sap:label="Integridade"/>
+        <Property Name="customIntegridadeComments" Type="Edm.String" sap:required="false" sap:creatable="true" sap:updatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="false" sap:filterable="false" sap:field-control="jobAppPermissionsNav/customIntegridadeComments" sap:label="Comentário"/>
+        <Property Name="customIntegridadeData" Type="Edm.DateTimeOffset" sap:required="false" sap:creatable="true" sap:updatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:field-control="jobAppPermissionsNav/customIntegridadeData" sap:label="Data Avaliação"/>
+        <Property Name="customIntegridadeAvaliador" Type="Edm.String" sap:required="false" sap:creatable="true" sap:updatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:field-control="jobAppPermissionsNav/customIntegridadeAvaliador" sap:label="Avaliador"/>
+        <Property Name="custom_envioIntegridade" Type="Edm.DateTimeOffset" sap:required="false" sap:creatable="true" sap:updatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:field-control="jobAppPermissionsNav/custom_envioIntegridade" sap:label="Data Integridade"/>
+        <Property Name="custom_tituloExGoverno" Type="Edm.String" sap:required="false" sap:creatable="true" sap:updatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="false" sap:filterable="false" sap:field-control="jobAppPermissionsNav/custom_tituloExGoverno" sap:label="Título do Cargo público"/>
+        <Property Name="custom_empresaExGoverno" Type="Edm.String" sap:required="false" sap:creatable="true" sap:updatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="false" sap:filterable="false" sap:field-control="jobAppPermissionsNav/custom_empresaExGoverno" sap:label="Nome da empresa pública"/>
+        <Property Name="custom_localExGoverno" Type="Edm.String" sap:required="false" sap:creatable="true" sap:updatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="false" sap:filterable="false" sap:field-control="jobAppPermissionsNav/custom_localExGoverno" sap:label="Local (Estado e Cidade)"/>
+        <NavigationProperty Name="custom_exGoverno" Relationship="MyService.JobApplication_custom_exGoverno" FromRole="JobApplication" ToRole="PicklistOption" sap:required="false" sap:creatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:picklist="yesNo" sap:field-control="jobAppPermissionsNav/custom_exGoverno" sap:label="Você é Funcionário de Governo atualmente ou foi Funcionário de Governo nos últimos 12 meses?"/>
+        <Property Name="custom_parentePublico1" Type="Edm.String" sap:required="false" sap:creatable="true" sap:updatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="false" sap:filterable="false" sap:field-control="jobAppPermissionsNav/custom_parentePublico1" sap:label="Nome do servidor público (Parente 1)"/>
+        <Property Name="custom_parentePublico2" Type="Edm.String" sap:required="false" sap:creatable="true" sap:updatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="false" sap:filterable="false" sap:field-control="jobAppPermissionsNav/custom_parentePublico2" sap:label="Nome do servidor público (Parente 2)"/>
+        <Property Name="custom_parentePublico3" Type="Edm.String" sap:required="false" sap:creatable="true" sap:updatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="false" sap:filterable="false" sap:field-control="jobAppPermissionsNav/custom_parentePublico3" sap:label="Nome do servidor público (Parente 3)"/>
+        <Property Name="custom_tituloPublico1" Type="Edm.String" sap:required="false" sap:creatable="true" sap:updatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="false" sap:filterable="false" sap:field-control="jobAppPermissionsNav/custom_tituloPublico1" sap:label="Título do Cargo público (Parente 1)"/>
+        <Property Name="custom_tituloPublico2" Type="Edm.String" sap:required="false" sap:creatable="true" sap:updatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="false" sap:filterable="false" sap:field-control="jobAppPermissionsNav/custom_tituloPublico2" sap:label="Título do Cargo público (Parente 2)"/>
+        <Property Name="custom_tituloPublico3" Type="Edm.String" sap:required="false" sap:creatable="true" sap:updatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="false" sap:filterable="false" sap:field-control="jobAppPermissionsNav/custom_tituloPublico3" sap:label="Título do Cargo público (Parente 3)"/>
+        <Property Name="custom_empresaPublico1" Type="Edm.String" sap:required="false" sap:creatable="true" sap:updatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="false" sap:filterable="false" sap:field-control="jobAppPermissionsNav/custom_empresaPublico1" sap:label="Nome da empresa pública (Parente 1)"/>
+        <Property Name="custom_empresaPublico2" Type="Edm.String" sap:required="false" sap:creatable="true" sap:updatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="false" sap:filterable="false" sap:field-control="jobAppPermissionsNav/custom_empresaPublico2" sap:label="Nome da empresa pública (Parente 2)"/>
+        <Property Name="custom_empresaPublico3" Type="Edm.String" sap:required="false" sap:creatable="true" sap:updatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="false" sap:filterable="false" sap:field-control="jobAppPermissionsNav/custom_empresaPublico3" sap:label="Nome da empresa pública (Parente 3)"/>
+        <Property Name="custom_localPublico1" Type="Edm.String" sap:required="false" sap:creatable="true" sap:updatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="false" sap:filterable="false" sap:field-control="jobAppPermissionsNav/custom_localPublico1" sap:label="Local (Estado e Cidade) (Parente 1)"/>
+        <Property Name="custom_localPublico2" Type="Edm.String" sap:required="false" sap:creatable="true" sap:updatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="false" sap:filterable="false" sap:field-control="jobAppPermissionsNav/custom_localPublico2" sap:label="Local (Estado e Cidade) (Parente 2)"/>
+        <Property Name="custom_localPublico3" Type="Edm.String" sap:required="false" sap:creatable="true" sap:updatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="false" sap:filterable="false" sap:field-control="jobAppPermissionsNav/custom_localPublico3" sap:label="Local (Estado e Cidade) (Parente 3)"/>
+        <NavigationProperty Name="custom_grauPublico1" Relationship="MyService.JobApplication_custom_grauPublico1" FromRole="JobApplication" ToRole="PicklistOption" sap:required="false" sap:creatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:picklist="grauParentesco" sap:field-control="jobAppPermissionsNav/custom_grauPublico1" sap:label="Grau de Parentesco (Parente 1)"/>
+        <NavigationProperty Name="custom_grauPublico2" Relationship="MyService.JobApplication_custom_grauPublico2" FromRole="JobApplication" ToRole="PicklistOption" sap:required="false" sap:creatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:picklist="grauParentesco" sap:field-control="jobAppPermissionsNav/custom_grauPublico2" sap:label="Grau de Parentesco (Parente 2)"/>
+        <NavigationProperty Name="custom_grauPublico3" Relationship="MyService.JobApplication_custom_grauPublico3" FromRole="JobApplication" ToRole="PicklistOption" sap:required="false" sap:creatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:picklist="grauParentesco" sap:field-control="jobAppPermissionsNav/custom_grauPublico3" sap:label="Grau de Parentesco (Parente 3)"/>
+        <NavigationProperty Name="jobAppStatus" Relationship="MyService.JobApplication_jobAppStatus" FromRole="JobApplication" ToRole="JobApplicationStatus" sap:required="false" sap:creatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:label="Job Application Status"/>
+        <NavigationProperty Name="jobRequisition" Relationship="MyService.JobApplication_jobRequisition" FromRole="JobApplication" ToRole="JobRequisition" sap:required="false" sap:creatable="false" sap:upsertable="false" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:label="Job Requisition"/>
+        <NavigationProperty Name="statusId" Relationship="MyService.JobApplication_statusId" FromRole="JobApplication" ToRole="PicklistOption" sap:required="false" sap:creatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:picklist="CandidateStatus" sap:field-control="jobAppPermissionsNav/statusId" sap:label="Status Id"/>
+      </EntityType>
+      <EntityType Name="JobApplicationStatus" sap:label="JobApplicationStatus" sap:upsertable="false">
+        <Key>
+          <PropertyRef Name="appStatusSetId"/>
+        </Key>
+        <Property Name="appStatusSetId" Type="Edm.Int64" Nullable="false" sap:required="false" sap:creatable="false" sap:updatable="false" sap:upsertable="false" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:label="Application Status Set Id"/>
+        <Property Name="appStatusId" Type="Edm.Int64" sap:required="false" sap:creatable="false" sap:updatable="false" sap:upsertable="false" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:label="Application Status Id"/>
+        <Property Name="appStatusName" Type="Edm.String" Nullable="false" sap:required="false" sap:creatable="false" sap:updatable="false" sap:upsertable="false" sap:visible="true" sap:sortable="false" sap:filterable="true" sap:label="Application Status Name"/>
+        <NavigationProperty Name="jobApplications" Relationship="MyService.JobApplicationStatus_jobApplications" FromRole="JobApplicationStatus" ToRole="JobApplication" sap:required="false" sap:creatable="false" sap:upsertable="false" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:label="Job Applications"/>
+      </EntityType>
+      <EntityType Name="JobRequisition" sap:label="JobRequisition" sap:upsertable="true">
+        <Property Name="position_job_title" Type="Edm.String" sap:required="false" sap:creatable="true" sap:updatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="false" sap:filterable="false" sap:field-control="jobReqPermissionsNav/position_job_title" sap:label="Position Job Title"/>
+        <NavigationProperty Name="recruiter" Relationship="MyService.JobRequisition_recruiter" FromRole="JobRequisition" ToRole="JobRequisitionOperator" sap:required="false" sap:creatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:field-control="jobReqPermissionsNav/recruiter" sap:label="Recruiter"/>
+      </EntityType>
+      <EntityType Name="PicklistOption" sap:label="PicklistOption" sap:upsertable="false">
+        <Key>
+          <PropertyRef Name="id"/>
+        </Key>
+        <Property Name="id" Type="Edm.Int64" Nullable="false" sap:required="false" sap:creatable="false" sap:updatable="true" sap:upsertable="false" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:label="id"/>
+        <Property Name="externalCode" Type="Edm.String" MaxLength="256" sap:required="false" sap:creatable="true" sap:updatable="true" sap:upsertable="false" sap:visible="true" sap:sortable="false" sap:filterable="true" sap:label="externalCode"/>
+        <Property Name="localeLabel" Type="Edm.String" sap:required="false" sap:creatable="false" sap:updatable="false" sap:upsertable="false" sap:visible="true" sap:sortable="false" sap:filterable="false" sap:label="localeLabel"/>
+        <Property Name="maxValue" Type="Edm.Double" sap:required="false" sap:creatable="true" sap:updatable="true" sap:upsertable="false" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:label="maxValue"/>
+        <Property Name="mdfExternalCode" Type="Edm.String" MaxLength="256" sap:required="false" sap:creatable="false" sap:updatable="false" sap:upsertable="false" sap:visible="true" sap:sortable="false" sap:filterable="true" sap:label="mdfExternalCode"/>
+        <Property Name="minValue" Type="Edm.Double" sap:required="false" sap:creatable="true" sap:updatable="true" sap:upsertable="false" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:label="minValue"/>
+        <Property Name="optionValue" Type="Edm.Double" sap:required="false" sap:creatable="true" sap:updatable="true" sap:upsertable="false" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:label="optionValue"/>
+        <Property Name="sortOrder" Type="Edm.Int32" sap:required="false" sap:creatable="true" sap:updatable="true" sap:upsertable="false" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:label="sortOrder"/>
+        <Property Name="status" Type="Edm.String" MaxLength="9" sap:required="false" sap:creatable="true" sap:updatable="true" sap:upsertable="false" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:label="status"/>
+        <NavigationProperty Name="childPicklistOptions" Relationship="MyService.PicklistOption_childPicklistOptions" FromRole="PicklistOption" ToRole="PicklistOption1" sap:required="false" sap:creatable="false" sap:upsertable="false" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:label="childPicklistOptions"/>
+        <NavigationProperty Name="parentPicklistOption" Relationship="MyService.PicklistOption_parentPicklistOption" FromRole="PicklistOption" ToRole="PicklistOption1" sap:required="false" sap:creatable="true" sap:upsertable="false" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:label="parentPicklistOption"/>
+      </EntityType>
+      <EntityType Name="JobRequisitionOperator" sap:label="JobRequisitionOperator" sap:upsertable="false">
+        <Property Name="firstName" Type="Edm.String" sap:required="false" sap:creatable="false" sap:updatable="false" sap:upsertable="false" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:label="Operator First Name"/>
+        <Property Name="lastName" Type="Edm.String" sap:required="false" sap:creatable="false" sap:updatable="false" sap:upsertable="false" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:label="Operator Last Name"/>
+      </EntityType>
+      <EntityType Name="Drafts">
+        <Key>
+          <PropertyRef Name="ID"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="jobApplicationId" Type="Edm.Int64" Nullable="false"/>
+        <Property Name="optionId" Type="Edm.Int64" Nullable="false"/>
+        <Property Name="customIntegridadeComments" Type="Edm.String" Nullable="false"/>
+      </EntityType>
+      <EntityType Name="IntegrityOptions" sap:label="Picklist Value" sap:upsertable="true">
+        <Key>
+          <PropertyRef Name="PickListV2_effectiveStartDate"/>
+          <PropertyRef Name="PickListV2_id"/>
+          <PropertyRef Name="externalCode"/>
+        </Key>
+        <Property Name="PickListV2_effectiveStartDate" Type="Edm.DateTime" Nullable="false" sap:required="true" sap:creatable="true" sap:updatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:display-format="Date" sap:label="Picklist_Effective Start Date"/>
+        <Property Name="PickListV2_id" Type="Edm.String" MaxLength="128" Nullable="false" sap:required="true" sap:creatable="true" sap:updatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:label="Picklist_Code"/>
+        <Property Name="externalCode" Type="Edm.String" MaxLength="128" Nullable="false" sap:required="true" sap:creatable="true" sap:updatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:label="External Code"/>
+        <Property Name="createdBy" Type="Edm.String" MaxLength="255" sap:required="false" sap:creatable="false" sap:updatable="false" sap:upsertable="false" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:label="createdBy"/>
+        <Property Name="createdDateTime" Type="Edm.DateTimeOffset" sap:required="false" sap:creatable="false" sap:updatable="false" sap:upsertable="false" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:label="createdDate"/>
+        <Property Name="externalStandardizedCode" Type="Edm.String" MaxLength="255" sap:required="false" sap:creatable="false" sap:updatable="false" sap:upsertable="false" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:label="External Standardized Code"/>
+        <Property Name="lValue" Type="Edm.Int64" sap:required="false" sap:creatable="true" sap:updatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:label="Sort Order (L Value)"/>
+        <Property Name="label_ar_SA" Type="Edm.String" MaxLength="255" sap:required="false" sap:creatable="true" sap:updatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:label="Label"/>
+        <Property Name="label_bs_ID" Type="Edm.String" MaxLength="255" sap:required="false" sap:creatable="true" sap:updatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:label="Label"/>
+        <Property Name="label_defaultValue" Type="Edm.String" MaxLength="255" sap:required="false" sap:creatable="true" sap:updatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:label="Label"/>
+        <Property Name="label_en_DEBUG" Type="Edm.String" MaxLength="255" sap:required="false" sap:creatable="true" sap:updatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:label="Label"/>
+        <Property Name="label_en_US" Type="Edm.String" MaxLength="255" sap:required="false" sap:creatable="true" sap:updatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:label="Label"/>
+        <Property Name="label_es_ES" Type="Edm.String" MaxLength="255" sap:required="false" sap:creatable="true" sap:updatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:label="Label"/>
+        <Property Name="label_ja_JP" Type="Edm.String" MaxLength="255" sap:required="false" sap:creatable="true" sap:updatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:label="Label"/>
+        <Property Name="label_localized" Type="Edm.String" MaxLength="255" sap:required="false" sap:creatable="true" sap:updatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="false" sap:filterable="false" sap:label="Label"/>
+        <Property Name="label_pt_BR" Type="Edm.String" MaxLength="255" sap:required="false" sap:creatable="true" sap:updatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:label="Label"/>
+        <Property Name="lastModifiedBy" Type="Edm.String" MaxLength="255" sap:required="false" sap:creatable="false" sap:updatable="false" sap:upsertable="false" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:label="lastModifiedBy"/>
+        <Property Name="lastModifiedDateTime" Type="Edm.DateTimeOffset" sap:required="false" sap:creatable="false" sap:updatable="false" sap:upsertable="false" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:label="lastModifiedDate"/>
+        <Property Name="legacyStatus" Type="Edm.Int64" sap:required="false" sap:creatable="false" sap:updatable="false" sap:upsertable="false" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:label="Status(legacy)"/>
+        <Property Name="maxVal" Type="Edm.Decimal" sap:required="false" sap:creatable="true" sap:updatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:label="Max value" sap:variable-scale="true"/>
+        <Property Name="mdfSystemRecordStatus" Type="Edm.String" MaxLength="255" sap:required="false" sap:creatable="false" sap:updatable="false" sap:upsertable="false" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:label="Record Status"/>
+        <Property Name="minVal" Type="Edm.Decimal" sap:required="false" sap:creatable="true" sap:updatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:label="Min value" sap:variable-scale="true"/>
+        <Property Name="nonUniqueExternalCode" Type="Edm.String" MaxLength="255" sap:required="false" sap:creatable="true" sap:updatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:label="Non-unique External Code"/>
+        <Property Name="optValue" Type="Edm.Decimal" sap:required="false" sap:creatable="false" sap:updatable="false" sap:upsertable="false" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:label="Value" sap:variable-scale="true"/>
+        <Property Name="optionId" Type="Edm.Int64" sap:required="false" sap:creatable="false" sap:updatable="false" sap:upsertable="false" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:label="Option ID"/>
+        <Property Name="parentPickListValue" Type="Edm.String" MaxLength="128" sap:required="false" sap:creatable="true" sap:updatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:label="Parent Picklist Value"/>
+        <Property Name="rValue" Type="Edm.Int64" sap:required="false" sap:creatable="false" sap:updatable="false" sap:upsertable="false" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:label="R Value"/>
+        <Property Name="status" Type="Edm.String" MaxLength="128" sap:required="true" sap:creatable="true" sap:updatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:label="Status"/>
+        <NavigationProperty Name="parentPickListValueNav" Relationship="MyService.IntegrityOptions_parentPickListValueNav" FromRole="IntegrityOptions" ToRole="IntegrityOptions1" sap:required="false" sap:creatable="true" sap:upsertable="true" sap:visible="true" sap:sortable="true" sap:filterable="true" sap:field-control="PickListValueV2FieldControlsNav/parentPickListValueNav" sap:label="Parent Picklist Value"/>
+      </EntityType>
+      <Association Name="JobApplication_customIntegridade">
+        <End Role="JobApplication" Type="MyService.JobApplication" Multiplicity="*"/>
+        <End Role="PicklistOption" Type="MyService.PicklistOption" Multiplicity="*"/>
+      </Association>
+      <Association Name="JobApplication_custom_exGoverno">
+        <End Role="JobApplication" Type="MyService.JobApplication" Multiplicity="*"/>
+        <End Role="PicklistOption" Type="MyService.PicklistOption" Multiplicity="*"/>
+      </Association>
+      <Association Name="JobApplication_custom_grauPublico1">
+        <End Role="JobApplication" Type="MyService.JobApplication" Multiplicity="*"/>
+        <End Role="PicklistOption" Type="MyService.PicklistOption" Multiplicity="*"/>
+      </Association>
+      <Association Name="JobApplication_custom_grauPublico2">
+        <End Role="JobApplication" Type="MyService.JobApplication" Multiplicity="*"/>
+        <End Role="PicklistOption" Type="MyService.PicklistOption" Multiplicity="*"/>
+      </Association>
+      <Association Name="JobApplication_custom_grauPublico3">
+        <End Role="JobApplication" Type="MyService.JobApplication" Multiplicity="*"/>
+        <End Role="PicklistOption" Type="MyService.PicklistOption" Multiplicity="*"/>
+      </Association>
+      <Association Name="JobApplication_jobAppStatus">
+        <End Role="JobApplication" Type="MyService.JobApplication" Multiplicity="*"/>
+        <End Role="JobApplicationStatus" Type="MyService.JobApplicationStatus" Multiplicity="0..1"/>
+      </Association>
+      <Association Name="JobApplication_jobRequisition">
+        <End Role="JobApplication" Type="MyService.JobApplication" Multiplicity="*"/>
+        <End Role="JobRequisition" Type="MyService.JobRequisition" Multiplicity="0..1"/>
+      </Association>
+      <Association Name="JobApplication_statusId">
+        <End Role="JobApplication" Type="MyService.JobApplication" Multiplicity="*"/>
+        <End Role="PicklistOption" Type="MyService.PicklistOption" Multiplicity="*"/>
+      </Association>
+      <Association Name="JobApplicationStatus_jobApplications">
+        <End Role="JobApplicationStatus" Type="MyService.JobApplicationStatus" Multiplicity="*"/>
+        <End Role="JobApplication" Type="MyService.JobApplication" Multiplicity="*"/>
+      </Association>
+      <Association Name="JobRequisition_recruiter">
+        <End Role="JobRequisition" Type="MyService.JobRequisition" Multiplicity="*"/>
+        <End Role="JobRequisitionOperator" Type="MyService.JobRequisitionOperator" Multiplicity="*"/>
+      </Association>
+      <Association Name="PicklistOption_childPicklistOptions">
+        <End Role="PicklistOption" Type="MyService.PicklistOption" Multiplicity="*"/>
+        <End Role="PicklistOption1" Type="MyService.PicklistOption" Multiplicity="*"/>
+      </Association>
+      <Association Name="PicklistOption_parentPicklistOption">
+        <End Role="PicklistOption" Type="MyService.PicklistOption" Multiplicity="*"/>
+        <End Role="PicklistOption1" Type="MyService.PicklistOption" Multiplicity="0..1"/>
+      </Association>
+      <Association Name="IntegrityOptions_parentPickListValueNav">
+        <End Role="IntegrityOptions" Type="MyService.IntegrityOptions" Multiplicity="*"/>
+        <End Role="IntegrityOptions1" Type="MyService.IntegrityOptions" Multiplicity="*"/>
+      </Association>
+      <Annotations Target="MyService.Drafts/ID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+      </Annotations>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>

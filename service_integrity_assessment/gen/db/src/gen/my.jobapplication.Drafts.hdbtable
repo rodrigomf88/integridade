@@ -1,0 +1,7 @@
+COLUMN TABLE my_jobapplication_Drafts (
+  ID NVARCHAR(36) NOT NULL,
+  jobApplicationId BIGINT NOT NULL,
+  optionId BIGINT NOT NULL,
+  customIntegridadeComments NCLOB NOT NULL,
+  PRIMARY KEY(ID)
+)

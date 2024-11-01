@@ -1,0 +1,6 @@
+VIEW MyService_Drafts AS SELECT
+  Drafts_0.ID,
+  Drafts_0.jobApplicationId,
+  Drafts_0.optionId,
+  Drafts_0.customIntegridadeComments
+FROM my_jobapplication_Drafts AS Drafts_0

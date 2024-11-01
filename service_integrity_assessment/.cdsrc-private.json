@@ -1,0 +1,80 @@
+{
+  "requires": {
+    "[hybrid]": {
+      "custom-service:service_integrity_assessment-connectivity": {
+        "binding": {
+          "type": "cf",
+          "apiEndpoint": "https://api.cf.us10.hana.ondemand.com",
+          "org": "VALE S.A._cfdevvir",
+          "space": "DEV",
+          "instance": "service_integrity_assessment-connectivity",
+          "key": "service_integrity_assessment-connectivity-key",
+          "resolved": false
+        },
+        "vcap": {
+          "name": "custom-service:service_integrity_assessment-connectivity"
+        }
+      },
+      "destinations": {
+        "binding": {
+          "type": "cf",
+          "apiEndpoint": "https://api.cf.us10.hana.ondemand.com",
+          "org": "VALE S.A._cfdevvir",
+          "space": "DEV",
+          "instance": "service_integrity_assessment-destination",
+          "key": "service_integrity_assessment-destination-key",
+          "resolved": false
+        },
+        "kind": "destinations",
+        "vcap": {
+          "name": "destinations"
+        }
+      },
+      "auth": {
+        "binding": {
+          "type": "cf",
+          "apiEndpoint": "https://api.cf.us10.hana.ondemand.com",
+          "org": "VALE S.A._cfdevvir",
+          "space": "DEV",
+          "instance": "service_integrity_assessment-auth",
+          "key": "service_integrity_assessment-auth-key",
+          "resolved": false
+        },
+        "kind": "xsuaa-auth",
+        "vcap": {
+          "name": "auth"
+        }
+      },
+      "db": {
+        "binding": {
+          "type": "cf",
+          "apiEndpoint": "https://api.cf.us10.hana.ondemand.com",
+          "org": "VALE S.A._cfdevvir",
+          "space": "DEV",
+          "instance": "service_integrity_assessment-db",
+          "key": "service_integrity_assessment-db-key",
+          "resolved": false
+        },
+        "kind": "hana-cloud",
+        "vcap": {
+          "name": "db"
+        }
+      },
+      "connectivity": {
+        "binding": {
+          "type": "cf",
+          "apiEndpoint": "https://api.cf.us10.hana.ondemand.com",
+          "org": "VALE S.A._cfdevvir",
+          "space": "DEV",
+          "instance": "service_integrity_assessment-connectivity",
+          "key": "service_integrity_assessment-connectivity-key",
+          "resolved": false
+        },
+        "kind": "connectivity",
+        "vcap": {
+          "name": "connectivity"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "CAP Debugger",
+      "command": "cds watch --profile hybrid --port 4009",
+      "type": "node-terminal",
+      "cwd": "${workspaceFolder}",
+      "request": "launch"
+    }
+  ]
+}

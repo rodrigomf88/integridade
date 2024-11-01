@@ -1,0 +1,60 @@
+@server = http://localhost:4005
+@auth = Authorization: Basic alice:
+
+
+### List all Job Applications with expand and filter11
+GET {{server}}/proxy/JobApplication
+Content-Type: application/json
+
+
+### List all Job Applications with expand and filter
+GET {{server}}/proxy/JobApplication?$expand=jobRequisition($expand=recruiter),jobAppStatus,statusId&$filter=jobAppStatus/appStatusSetId eq 756 or jobAppStatus/appStatusSetId eq 726 or jobAppStatus/appStatusSetId eq 729 or jobAppStatus/appStatusSetId eq 799 or jobAppStatus/appStatusSetId eq 802
+Content-Type: application/json
+
+### List
+GET {{server}}/proxy/JobApplication?$expand=jobAppStatus,jobRequisition($expand=recruiter),statusId&$filter=jobAppStatus/appStatusSetId%20eq%20756%20or%20jobAppStatus/appStatusSetId%20eq%20726%20or%20jobAppStatus/appStatusSetId%20eq%20729%20or%20jobAppStatus/appStatusSetId%20eq%20799%20or%20jobAppStatus/appStatusSetId%20eq%20802
+
+### Show a unique Job Application
+GET {{server}}/proxy/JobApplication(701)?$select=customIntegridadeComments,customIntegridadeData
+Content-Type: application/json
+
+### Update a unique Job Application
+PUT {{server}}/proxy/JobApplication(560)
+Content-Type: application/json
+
+{
+  "customIntegridadeComments": "Job application denied",
+  "customIntegridadeData": "2024-07-17T12:01:30.254Z",
+  "customIntegridadeAvaliador": "John Smith"
+}
+
+
+### List Drafts
+GET  {{server}}/proxy/Drafts
+Content-Type: application/json
+
+### Create a Draft
+POST {{server}}/proxy/Drafts
+Content-Type: application/json
+{{auth}}
+
+{
+  "applicationId": 560,
+  "avaliadorIntegridade": "avaliadorIntegridade-3835045",
+  "resultadoIntegridade": "resultadoIntegridade-3835045",
+  "comentarioIntegridade": "comentarioIntegridade-3835045",
+  "isPublicAgent": false,
+  "wasPublicAgent": false,
+  "parentePublico1": "parentePublico1-3835045",
+  "parentePublico2": "parentePublico2-3835045",
+  "parentePublico3": "parentePublico3-3835045",
+  "tituloPublico1": "tituloPublico1-3835045",
+  "tituloPublico2": "tituloPublico2-3835045",
+  "tituloPublico3": "tituloPublico3-3835045",
+  "grauPublico1": "grauPublico1-3835045",
+  "grauPublico2": "grauPublico2-3835045",
+  "grauPublico3": "grauPublico3-3835045",
+  "localPublico1": "localPublico1-3835045",
+  "localPublico2": "localPublico2-3835045",
+  "localPublico3": "localPublico3-3835045"
+}
