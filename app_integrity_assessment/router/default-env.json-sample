@@ -1,0 +1,44 @@
+{
+  "destinations": [
+    {
+      "name": "srv-api",
+      "url": "http://localhost:4004",
+      "forwardAuthToken": true
+    }
+  ],
+  "VCAP_SERVICES": {
+    "xsuaa": [
+      {
+        "name": "mysample-auth",
+        "instance_name": "[REDACTED]",
+        "label": "xsuaa",
+        "tags": [
+          "xsuaa",
+          "endpoint:[REDACTED]",
+          "org:[REDACTED]",
+          "space:[REDACTED]"
+        ],
+        "plan": "application",
+        "credentials": {
+          "apiurl": "[REDACTED]",
+          "clientid": "[REDACTED]",
+          "clientsecret": "[REDACTED]",
+          "credential-type": "instance-secret",
+          "identityzone": "[REDACTED]",
+          "identityzoneid": "[REDACTED]",
+          "sburl": "[REDACTED]",
+          "serviceInstanceId": "[REDACTED]",
+          "service_key_name": "key",
+          "subaccountid": "[REDACTED]",
+          "tenantid": "[REDACTED]",
+          "tenantmode": "dedicated",
+          "uaadomain": "[REDACTED]",
+          "url": "[REDACTED]",
+          "verificationkey": "[REDACTED]",
+          "xsappname": "[REDACTED]",
+          "zoneid": "[REDACTED]"
+        }
+      }
+    ]
+  }
+}

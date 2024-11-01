@@ -1,0 +1,152 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" controllerName="com.vale.integrity.assessment.app.controller.Details" displayBlock="true">
+    <Page id="formPage" showHeader="false">
+        <content>
+            <VBox fitContainer="true" backgroundDesign="Transparent">
+                <ObjectHeader title="{parts: [                                         {path: 'data>/firstName'},                                         {path: 'data>/lastName'}                                 ],                                 formatter: '.formatter.sFullName'                             }" backgroundDesign="Solid" number="Nº da vaga: {data>/jobReqId}" class="sapUiNoMarginBottom">
+                    <attributes>
+                        <ObjectAttribute title="Vaga" text="{data>/jobRequisition/position_job_title}"/>
+                        <ObjectAttribute title="Recrutador" text="{parts: [                                     {path: 'data>/jobRequisition/recruiter/0/firstName'},                                     {path: 'data>/jobRequisition/recruiter/0/lastName'}                                     ],                                 formatter: '.formatter.sFullName'                             }"/>
+                        <ObjectAttribute title="Cód. Avaliador" text="{userInfo>/name}"/>
+                        <ObjectAttribute title="Email do avaliador" text="{userInfo>/email}"/>
+
+                    </attributes>
+                    <statuses>
+                        <ObjectStatus title="Status" text="{path: 'data>/status', formatter: '.formatter.translateText'}" state="{path: 'data>/status', formatter: '.formatter.formatStatus'}"/>
+                    </statuses>
+                </ObjectHeader>
+                <IconTabBar class="sapUiResponsiveContentPadding" backgroundDesign="Transparent">
+                    <items>
+                        <IconTabFilter key="info" text="Informações">
+                        <f:SimpleForm backgroundDesign="Transparent">
+                                <f:content>
+                                    <VBox>
+                                        <Label wrapping="true" design="Bold" text="Você é Funcionário de Governo atualmente ou foi Funcionário de Governo nos últimos 12 meses?" labelFor="GroupC" class="sapUiTinyMarginBottom"/>
+                                        <RadioButtonGroup columns="2" class="sapUiNoMarginBottom" enabled="false">
+                                            <RadioButton text="Sim" id="inputVisible2" selected="{bSelected>/selected}"/>
+                                            <RadioButton text="Não" id="inputNotVisible2" selected="{= !${bSelected>/selected} }"/>
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                </f:content>
+                            </f:SimpleForm>
+                        <VBox visible="{bSelected>/selected}" fitContainer="true" backgroundDesign="Transparent" class="sapUiNoMarginTop">
+                                <HBox class="sapUiSmallMargin sapUiNoMarginTop">
+                                    <VBox class="sapUiLargeMarginEnd">
+                                        <Label text="Nome da empresa pública" design="Bold" class="sapUiLargeMarginEnd"/>
+                                        <Text text="{data>/custom_empresaExGoverno}" width="100px"/>
+                                    </VBox>
+                                    <VBox class="sapUiLargeMarginEnd">
+                                        <Label text="Título do Cargo público" design="Bold" class="sapUiLargeMarginEnd"/>
+                                        <Text text="{data>/custom_tituloExGoverno}" width="100px"/>
+                                    </VBox>
+                                    <VBox class="sapUiLargeMarginEnd">
+                                        <Label text="Local (Estado e Cidade)" design="Bold" class="sapUiLargeMarginEnd"/>
+                                        <Text text="{data>/custom_localExGoverno}" width="100px"/>
+                                    </VBox>
+                                </HBox>
+                            </VBox>
+                            <f:SimpleForm backgroundDesign="Transparent" class="sapUiNoMarginTop">
+                                <f:content>
+                                    <VBox>
+                                        <Label design="Bold" text="Você possui algum Familiar ou Pessoa Próxima autando em qualquer atividade, ainda que temporária ou voluntária, como Funcionário do Governo?" labelFor="GroupC" class="sapUiTinyMarginBottom"/>
+                                        <RadioButtonGroup columns="2" enabled="false">
+                                            <RadioButton text="Sim" id="inputVisible" selected="{bSelected>/selected2}"/>
+                                            <RadioButton text="Não" id="inputNotVisible" selected="{= !${bSelected>/selected2} }"/>
+                                        </RadioButtonGroup>
+                                    </VBox>
+                                </f:content>
+                            </f:SimpleForm>
+                            <VBox visible="{bSelected>/selected2}" fitContainer="true" backgroundDesign="Transparent" class="sapUiNoMarginTop">
+                                <HBox class="sapUiSmallMargin sapUiNoMarginTop" visible="{= ${data>/custom_grauPublico3}.length !== 0 || ${data>/custom_parentePublico2} !== null}">
+                                    <VBox class="sapUiLargeMarginEnd">
+                                        <Label text="Nome do servidor público (Parente 2)" design="Bold" class="sapUiLargeMarginEnd"/>
+                                        <Text text="{data>/custom_parentePublico2}" width="100px"/>
+                                    </VBox>
+                                    <VBox class="sapUiLargeMarginEnd">
+                                        <Label text="Título do Cargo público (Parente 2)" design="Bold" class="sapUiLargeMarginEnd"/>
+                                        <Text text="{data>/custom_tituloPublico2}" width="100px"/>
+                                    </VBox>
+                                    <VBox class="sapUiLargeMarginEnd">
+                                        <Label text="Grau de Parentesco (Parente 2)" design="Bold" class="sapUiLargeMarginEnd"/>
+                                        <Text text="{data>/custom_grauPublico2/0/localeLabel}" width="140px"/>
+                                    </VBox>
+                                    <VBox class="sapUiLargeMarginEnd">
+                                        <Label text="Nome da empresa pública (Parente 2)" design="Bold" class="sapUiLargeMarginEnd"/>
+                                        <Text text="{data>/custom_empresaPublico2}" width="100px"/>
+                                    </VBox>
+                                    <VBox class="sapUiLargeMarginEnd">
+                                        <Label text="Local (Estado e Cidade)(Parente 2)" design="Bold" class="sapUiLargeMarginEnd"/>
+                                        <Text text="{data>/custom_localPublico2}" width="100px"/>
+                                    </VBox>
+                                </HBox>
+                                <HBox class="sapUiSmallMargin sapUiNoMarginTop" visible="{= ${data>/custom_grauPublico3}.length !== 0 || ${data>/custom_parentePublico3} !== null}">
+                                    <VBox class="sapUiLargeMarginEnd">
+                                        <Label text="Nome do servidor público (Parente 3)" design="Bold" class="sapUiLargeMarginEnd"/>
+                                        <Text text="{data>/custom_parentePublico3}" width="100px"/>
+                                    </VBox>
+                                    <VBox class="sapUiLargeMarginEnd">
+                                        <Label text="Título do Cargo público (Parente 3)" design="Bold" class="sapUiLargeMarginEnd"/>
+                                        <Text text="{data>/custom_tituloPublico3}" width="100px"/>
+                                    </VBox>
+                                    <VBox class="sapUiLargeMarginEnd">
+                                        <Label text="Grau de Parentesco (Parente 3)" design="Bold" class="sapUiLargeMarginEnd"/>
+                                        <Text text="{data>/custom_grauPublico3/0/localeLabel}" width="140px"/>
+                                    </VBox>
+                                    <VBox class="sapUiLargeMarginEnd">
+                                        <Label text="Nome da empresa pública (Parente 3)" design="Bold" class="sapUiLargeMarginEnd"/>
+                                        <Text text="{data>/custom_empresaPublico3}" width="100px"/>
+                                    </VBox>
+                                    <VBox class="sapUiLargeMarginEnd">
+                                        <Label text="Local (Estado e Cidade)(Parente 3)" design="Bold" class="sapUiLargeMarginEnd"/>
+                                        <Text text="{data>/custom_localPublico3}" width="100px"/>
+                                    </VBox>
+                                </HBox>
+                            <items>
+                                <HBox xmlns="sap.m" class="sapUiSmallMargin sapUiNoMarginTop" visible="{= ${data>/custom_grauPublico3}.length !== 0 || ${data>/custom_parentePublico1} !== null}">
+                                    <VBox class="sapUiLargeMarginEnd">
+                                        <Label text="Nome do servidor público (Parente 1)" design="Bold" class="sapUiLargeMarginEnd"/>
+                                        <Text text="{data>/custom_parentePublico1}" width="100px"/>
+                                    </VBox>
+                                    <VBox class="sapUiLargeMarginEnd">
+                                        <Label text="Título do Cargo público (Parente 1)" design="Bold" class="sapUiLargeMarginEnd"/>
+                                        <Text text="{data>/custom_tituloPublico1}" width="100px"/>
+                                    </VBox>
+                                    <VBox class="sapUiLargeMarginEnd">
+                                        <Label text="Grau de Parentesco (Parente 1)" design="Bold" class="sapUiLargeMarginEnd"/>
+                                        <Text text="{data>/custom_grauPublico1/0/localeLabel}" width="140px"/>
+                                    </VBox>
+                                    <VBox class="sapUiLargeMarginEnd">
+                                        <Label text="Nome da empresa pública (Parente 1)" design="Bold" class="sapUiLargeMarginEnd"/>
+                                        <Text text="{data>/custom_empresaPublico1}" width="100px"/>
+                                    </VBox>
+                                    <VBox class="sapUiLargeMarginEnd">
+                                        <Label text="Local (Estado e Cidade)(Parente 1)" design="Bold" class="sapUiLargeMarginEnd"/>
+                                        <Text text="{data>/custom_localPublico1}" width="100px"/>
+                                    </VBox>
+                                </HBox>
+                            </items>
+                            </VBox>
+                        </IconTabFilter>
+                        <IconTabFilter key="assessment" text="Avaliação">
+                            <VBox class="sapUiSmallMargin sapUiTinyMarginTop">
+                                <Label design="Bold" text="Integridade do candidato" required="false" class="sapUiTinyMarginBottom sapUiNoMarginTop"/>
+                                <ComboBox id="inputIntegrity" width="15rem" items="{picklist>/}" class="sapUiSmallMarginBottom" placeholder="Selecione" value="{globalModel>/externalCode}">
+                                    <core:Item key="{picklist>optionId}" text="{picklist>externalCode}"/>
+                                </ComboBox>
+                                <Label design="Bold" text="Comentário" required="false" class="sapUiTinyMarginBottom"/>
+                                <TextArea value="{globalModel>/customIntegridadeComments}" class="sapUiSmallMarginBottom" id="inputComment" placeholder="Digite um comentário" width="25rem"/>
+                            </VBox>
+                        </IconTabFilter>
+                    </items>
+                </IconTabBar>
+            </VBox>
+        </content>
+        <footer>
+            <Toolbar>
+                <Button type="Ghost" text="Voltar" press="onNavBack"/>
+                <ToolbarSpacer/>
+                <Button type="Default" text="Salvar" press="onSendDraft"/>
+                <Button type="Emphasized" text="Enviar" press="onSendData"/>
+            </Toolbar>
+        </footer>
+    </Page>
+</mvc:View>

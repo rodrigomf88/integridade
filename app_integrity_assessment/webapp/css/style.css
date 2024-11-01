@@ -1,0 +1,15 @@
+/* Enter your custom styles here */
+.editMarginEnd {
+    margin-right: 2px;
+}
+
+.customRoundingTable {
+    border-radius: 0.75rem !important;
+}
+
+.sapMOH.sapMOHBgTranslucent,.sapMOHC.sapMOHBgTranslucent,.sapMOH.sapMOHBgSolid,.sapMOHC.sapMOHBgSolid {
+    background-color: #fff;
+    background: #fff;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+}

@@ -1,0 +1,104 @@
+<mvc:View controllerName="com.vale.integrity.assessment.app.controller.Home"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns:m="sap.m"
+    xmlns="sap.ui.table"
+	xmlns:u="sap.ui.unified"
+	xmlns:c="sap.ui.core"
+	xmlns:main="sap.ui.webc.main">
+    <m:Page id="page" showHeader="false">
+        <m:content> 
+			<m:VBox fitContainer="true">
+				<m:HBox class="sapUiSmallMargin customRoundingTable" backgroundDesign="Solid" height="calc(100% - 10px)" >
+					<Table
+						rows="{data>/}"
+						selectionMode="None"
+						enableColumnReordering="false"
+						id="jobApplicationTable"
+						rowMode="Auto"
+						class="sapUiTinyMarginTopBottom sapUiResponsiveContentPadding"
+						rowActionCount="1">
+						<extension>
+							<m:OverflowToolbar style="Clear">
+								<m:Title id="title" text="Lista de vagas ({dataCount>/count})"/>
+								<m:ToolbarSpacer/>
+								<m:Button icon="sap-icon://refresh" press="onRefresh"/>
+								<m:SearchField id="searchField" width="15rem" liveChange="onSearch" placeholder="Pesquisar" />
+							</m:OverflowToolbar>
+						</extension>
+						<columns>
+							<Column hAlign="Center" resizable="false" filterProperty="jobReqId">
+								<m:Label text="Número da vaga" />
+								<template>
+									<m:Text text="{data>jobReqId}" wrapping="false" />
+								</template>
+							</Column>
+							<Column hAlign="Center" resizable="false" filterProperty="jobRequisition/position_job_title">
+								<m:Label text="Vaga" />
+								<template>
+									<m:Label text="{data>jobRequisition/position_job_title}"/>
+								</template>
+							</Column>
+							<Column hAlign="Center" resizable="false" filterProperty="firstName">
+								<m:Label text="Candidato" />
+								<template>
+									<m:Label text="{
+													parts: [
+														{path: 'data>firstName'},
+														{path: 'data>lastName'}
+													],
+													formatter: '.formatter.sFullName'
+												}"/>
+								</template>
+							</Column>
+							<Column hAlign="Center" resizable="false" filterProperty="jobRequisition/recruiter/0/firstName">
+								<m:Label text="Recrutador" />
+								<template>
+									<m:Label text="{
+													parts: [
+														{path: 'data>jobRequisition/recruiter/0/firstName'},
+														{path: 'data>jobRequisition/recruiter/0/lastName'}
+													],
+													formatter: '.formatter.sFullName'
+												}"/>
+								</template>
+							</Column>
+							<Column resizable="false" hAlign="Center">
+								<m:Label text="Status" />
+								<template>
+									<main:Badge  
+										text="{
+											parts: [
+												{path: 'data>status'}
+											],
+											formatter: '.formatter.translateText'
+										}"
+										colorScheme="{
+											parts: [
+												{path: 'data>status'}
+											], 
+											formatter: '.formatter.formatColorScheme'
+										}" />
+								</template>
+							</Column>
+							<Column hAlign="Center" resizable="false" filterProperty="custom_envioIntegridade">
+								<m:Label text="Data do envio do candidato para integridade" />
+								<template>
+									<m:Label text="{path: 'data>custom_envioIntegridade', formatter: '.formatter.formatDate'}"/>
+								</template>
+							</Column>
+						</columns>
+						<rowActionTemplate>
+							<RowAction>
+								<RowActionItem
+									id="rowActionID"
+									icon="sap-icon://navigation-right-arrow"
+									press="onNav"
+								/>
+							</RowAction>
+						</rowActionTemplate>
+					</Table>
+				</m:HBox>
+			</m:VBox>
+		</m:content>
+    </m:Page>
+</mvc:View>
